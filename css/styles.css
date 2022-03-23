@@ -1,0 +1,447 @@
+/*
+
+    ## COLORS ##
+
+*/
+
+:root {
+    --main-light-color: #FFFEF9;
+    --main-light-color-variant: #ABADA3;
+
+    --main-dark-color: #1A1919;
+
+    --main-accent-color: #5060B2;
+
+    --main-accent-color-variant-1: #707CD2;
+    --main-accent-color-variant-2: #9099F2;
+    --main-accent-color-variant-3: #B0B8FF;
+}
+
+html,body {padding:0; margin:0;}
+
+header {
+    position: relative;
+    display: flex;
+    
+    width: 100%;
+    height: 250px;
+
+    background: var(--main-dark-color);
+    color: var(--main-light-color);
+    
+    font-family: Avenir, Arial, sans-serif;
+}
+
+/*
+
+    ## MAIN PAGE ##
+
+*/
+
+/*
+
+    ## HEADER ##
+
+*/
+
+.values-list {
+    margin: auto 0;
+    margin-left: 75px;
+
+    list-style: none;
+
+    font-family: Courier, monospace;
+    text-align: right;
+}
+
+.values-list:hover #min {
+    color: var(--main-accent-color-variant-3);
+}
+
+.values-list:hover #median {
+    color: var(--main-accent-color-variant-2);
+}
+
+.values-list:hover #max {
+    color: var(--main-accent-color-variant-1);
+}
+
+.value {
+    cursor: default;
+    transition: color 250ms ease;
+}
+
+/*.value::selection {
+    color: var(--main-light-color-variant);
+    background: none;
+}*/
+
+.main-header {
+    margin: auto;
+
+    font-size: 3.5rem;
+    text-align: center;
+
+    cursor: default;
+}
+
+/*#main-header-name::selection {
+    color: var(--main-light-color-variant);
+    background: none;
+}*/
+
+/*.main-header::selection {
+    color: var(--main-light-color-variant);
+    background: none;
+}*/
+
+
+#profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    
+    background: none;
+    background-position: center;
+    background-size: cover;
+}
+
+#profile-link {
+    margin: auto 0;
+    margin-right: 100px;
+}
+
+#profile-picture:hover {
+    animation-name: spin;
+    animation-duration: 1000ms;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    
+    /*
+    TODO
+    play animation once
+    dont let animation get stopped by stopped hovering
+    https://stackoverflow.com/questions/7694323/css3-animation-on-hover-force-entire-animation
+    */   
+    
+}
+
+@keyframes spin {
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+section {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 250px);
+}
+
+/*
+
+    ## COLLECTION ##
+
+*/
+
+.collection-container {
+    position: relative;
+    padding: 60px;
+
+    /*display: inline-block;*/
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+
+    background: var(--main-light-color);
+}
+
+.collection-cover {
+    float: left;
+    width: 400px;
+    height: 400px;
+    margin: 10px 10px;
+    
+    transform: scale(0.75);
+
+    background: var(--main-dark-color);
+    box-shadow: 0px 10px 20px 5px rgba(0,0,0,0.3);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: all 250ms ease;
+    transition-delay: 25ms;
+}
+
+.collection-cover:hover {
+    filter: saturate(0) /*brightness(0.5) /*blur(1px)*/;
+
+    transform: scale(0.85);
+}
+
+.collection-cover-text {
+    font-family: Avenir, Arial, sans-serif;
+    font-size: 2.25rem;
+    font-weight: 200;
+    color: transparent;
+    background-color: transparent;
+    text-align: center;
+    transition: all 200ms ease-in-out;
+}
+
+.collection-cover-text:hover {
+    cursor: default;
+}
+
+.collection-cover:hover .collection-cover-text {
+    color: #fff;
+    text-shadow: -2px 0 2px black, 0 2px 2px black, 2px 0 2px black, 0 -2px 2px black
+    /*background-color: #000;*/
+}
+
+/*
+
+    ## BACK TO TOP BUTTON ##
+
+*/
+
+
+#myBtn {
+    display: none; /* Hidden by default */
+    font-family: 'Courier New', Courier, monospace;
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgba(26,25,25,0.25); /* Set a background color */
+    color: rgba(255,254,249,0.75); /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+
+    transition: all 200ms ease-in-out;
+  }
+  
+  #myBtn:hover {
+    background-color: rgba(26,25,25,0.75); /* Add a dark-grey background on hover */
+    color: rgba(255,254,249,1)
+  }
+
+
+/*
+
+
+
+    ## LOGIN PAGE ##
+
+
+    
+*/
+
+.login-body {
+    background: var(--main-dark-color);
+    color: #FFFEF9;
+    font-family: Avenir, Arial, sans-serif;
+}
+
+#login-header {
+    margin: 0 auto;
+    font-size: 3.5rem;
+    text-align: center;
+    margin-top: 2em;
+
+    transform: translateY(125%);
+
+    animation-name: centerToTop;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+}
+
+
+
+@keyframes centerToTop {
+    0% {
+      transform: translateY(125%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+}
+
+
+
+
+#login-header-link {
+    color: var(--main-accent-color);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    transition: all 100ms ease-in-out;
+
+
+    color: var(--main-light-color);
+    
+    animation-name: whiteToBlue;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 2s;
+
+}
+
+@keyframes whiteToBlue {
+    0% {
+      color: var(--main-light-color);
+    }
+    100% {
+      color: var(--main-accent-color);
+    }
+}
+
+
+#login-header-link:hover {
+    text-decoration-color: var(--main-accent-color);
+}
+
+#login-box {
+    background: var(--main-light-color);
+    color: var(--main-dark-color);
+    width: 30em;
+    height: 17em;
+    margin: 8em auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 50px;
+
+    opacity: 0%;
+
+    animation-name: hideToShow;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 2.5s;
+}
+
+@keyframes hideToShow {
+    0% {
+      opacity: 0%;
+    }
+    100% {
+      opacity: 100%;
+    }
+}
+
+#login-box-header {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.login-box-input {
+    margin: 1em auto;
+
+    width: 18em;
+
+    text-align: center;
+    padding: 0.5em;
+    background: transparent;
+    
+    font-family: Avenir, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+
+    border: 3px solid var(--main-dark-color);
+    border-radius: 25px;
+
+    transition: all 50ms ease-in-out;
+}
+
+.login-box-input::placeholder {
+    font-family: Avenir, Arial, sans-serif;
+    color: var(--main-dark-color);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 50ms ease-in-out
+}
+
+.login-box-input:hover {
+    cursor: pointer;
+}
+
+.login-box-input:hover::placeholder {
+    color: var(--main-accent-color);
+}
+
+.login-box-input:focus {
+    outline: none;
+    border: 3px solid var(--main-accent-color);
+    color: var(--main-accent-color);
+    caret-color: transparent;
+}
+
+.login-box-input:focus::placeholder {
+    color: var(--main-accent-color);
+}
+
+
+#login-username-input {
+    margin: 0 auto;
+}
+
+#login-submit-button {
+    margin: 0 auto;
+    font-family: Avenir, Arial, sans-serif;
+    width: 6em;
+    border: 3px solid var(--main-accent-color);
+    transition: all 250ms ease-in-out;
+}
+
+#login-submit-button:hover {
+    background: var(--main-accent-color);
+    color: var(--main-light-color);
+    cursor: pointer;
+}
+
+#login-token-link {
+    float: right;
+    margin: 2em 5em;
+    font-family: Avenir, Arial, sans-serif;
+    font-weight: 600;
+    color: var(--main-light-color);
+    text-decoration-color: transparent;
+    transition: all 100ms ease-in-out;
+
+    opacity: 0%;
+
+    animation-name: hideToShow;
+    animation-duration: 1.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    animation-delay: 5s;
+}
+
+@keyframes hideToShow {
+    0% {
+      opacity: 0%;
+    }
+    100% {
+      opacity: 100%;
+    }
+}
+
+#login-token-link:hover {
+    text-decoration-color: var(--main-light-color);
+}
