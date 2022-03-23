@@ -1,4 +1,4 @@
-# Discogs Collection Viewer
+# [Discogs Collection Viewer](https://discogs-collection-viewer.vercel.app)
 
 This is a simple tool to view your vinyl collection on [Discogs](https://www.discogs.com/).
 
