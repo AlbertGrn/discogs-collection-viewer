@@ -80,7 +80,7 @@ async function validateUserData(profile_url, collection_url) {
         } else if(response.status == 401) {
             collectionIsValid = false;
         }
-    });
+    })
     
     return [profileIsValid, collectionIsValid];
 }
