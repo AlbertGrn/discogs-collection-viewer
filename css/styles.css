@@ -103,7 +103,7 @@ header {
     height: 100px;
     border-radius: 100%;
     
-    background: none;
+    background: url("/img/blank_profile.png");
     background-position: center;
     background-size: cover;
 }
