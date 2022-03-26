@@ -1,5 +1,3 @@
-//localStorage.setItem("storageName",getInput);
-
 const login_username = document.getElementById("login-username-input");
 const login_token = document.getElementById("login-token-input");
 const login_button = document.getElementById("login-submit-button");
@@ -9,6 +7,11 @@ login_button.addEventListener("click", function() {
     let userName = login_username.value;
     let userToken = login_token.value;
     
+    login(userName, userToken)
+});
+
+
+function login(userName, userToken) {
     if(userName != "" && userToken != "") {
         let profile_url = getProfileUrl(userName);
         let collection_url = getCollectionUrl(userName, userToken);
@@ -18,7 +21,7 @@ login_button.addEventListener("click", function() {
         
         location.href = "collection.html"; 
     }
-});
+}
 
 
 function getProfileUrl(userName) {
