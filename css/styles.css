@@ -15,6 +15,8 @@
     --main-accent-color-variant-1: #707CD2;
     --main-accent-color-variant-2: #9099F2;
     --main-accent-color-variant-3: #B0B8FF;
+
+    --main-invalid-color: #b25058;
 }
 
 html,body {padding:0; margin:0;}
@@ -386,7 +388,7 @@ section {
 
 .login-box-input:focus {
     outline: none;
-    border: 3px solid var(--main-accent-color);
+    /*border: 3px solid var(--main-accent-color);*/
     color: var(--main-accent-color);
     caret-color: transparent;
 }
