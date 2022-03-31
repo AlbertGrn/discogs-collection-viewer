@@ -1,6 +1,6 @@
 # [Discogs Collection Viewer](https://discogs-collection-viewer.vercel.app)
 
-This is a simple tool to view your vinyl collection on [Discogs](https://www.discogs.com/).
+This is a simple tool to view your vinyl collection and wishlist on [Discogs](https://www.discogs.com/).
 
 ## How does it work?
 
