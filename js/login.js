@@ -35,6 +35,7 @@ async function login(userName, userToken) {
     if(userName != "" && userToken != "") {
         let profile_url = getProfileUrl(userName);
         let collection_url = getCollectionUrl(userName, userToken);
+        let wishlist_url = getWishlistUrl(userName, userToken);
         
         let inputsAreValid = await validateUserData(profile_url, collection_url);
 
@@ -42,6 +43,7 @@ async function login(userName, userToken) {
             //profile valid, token valid
             localStorage.setItem("profile_url", profile_url);
             localStorage.setItem("collection_url", collection_url);
+            localStorage.setItem("wishlist_url", wishlist_url)
         
             location.href = "collection.html"; 
 
@@ -94,4 +96,9 @@ function getProfileUrl(userName) {
 function getCollectionUrl(userName, userToken) {
     let collection_url = 'https://api.discogs.com/users/'.concat(userName).concat('/collection?folders/0&token=').concat(userToken);
     return collection_url;
+}
+
+function getWishlistUrl(userName, userToken) {
+    let wishlist_url = 'https://api.discogs.com/users/'.concat(userName).concat('/wants?token=').concat(userToken);
+    return wishlist_url;
 }

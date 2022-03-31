@@ -21,9 +21,17 @@
         </li>
     </ul>
 
-    <h1 class="main-header"><span id="main-header-name">[Name]</span>'s<br/>Vinyl Collection</h1>
+    <h1 class="main-header"><span id="main-header-name">[Name]</span>'s<br/><span id="main-header-description">Vinyl Collection</span></h1>
 
     <a id="profile-link" href="" target="_blank"><div id="profile-picture"></div></a>
+
+    <div id="tab-container">
+
+        <button class="tab-button" id="defaultOpen" onclick="switchTab(event, 'collection-container')">Collection</button>
+        
+        <button class="tab-button" onclick="switchTab(event, 'wishlist-container')">Wishlist</button>
+
+    </div>
 
 </header>
 <section class="main-section">
@@ -31,7 +39,11 @@
     <button onclick="topFunction()" id="myBtn" title="Scroll back to top">Back to top</button>
 
 
-    <div class="collection-container" id="collection-container">
+    <div class="collection-container tabcontent" id="collection-container">
+
+    </div>
+
+    <div class="collection-container tabcontent" id="wishlist-container">
 
     </div>
 

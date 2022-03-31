@@ -21,30 +21,33 @@
 
 html,body {padding:0; margin:0;}
 
+
+/*
+
+## MAIN PAGE ##
+
+*/
+
+
+
+/*
+
+## HEADER ##
+
+*/
+
 header {
     position: relative;
     display: flex;
     
     width: 100%;
-    height: 250px;
+    height: 300px;
 
     background: var(--main-dark-color);
     color: var(--main-light-color);
     
     font-family: Avenir, Arial, sans-serif;
 }
-
-/*
-
-    ## MAIN PAGE ##
-
-*/
-
-/*
-
-    ## HEADER ##
-
-*/
 
 .values-list {
     margin: auto 0;
@@ -56,27 +59,15 @@ header {
     text-align: right;
 }
 
-.values-list:hover #min {
-    color: var(--main-accent-color-variant-3);
-}
-
-.values-list:hover #median {
-    color: var(--main-accent-color-variant-2);
-}
-
-.values-list:hover #max {
-    color: var(--main-accent-color-variant-1);
-}
 
 .value {
     cursor: default;
     transition: color 250ms ease;
 }
 
-/*.value::selection {
-    color: var(--main-light-color-variant);
+.value::selection {
     background: none;
-}*/
+}
 
 .main-header {
     margin: auto;
@@ -86,17 +77,6 @@ header {
 
     cursor: default;
 }
-
-/*#main-header-name::selection {
-    color: var(--main-light-color-variant);
-    background: none;
-}*/
-
-/*.main-header::selection {
-    color: var(--main-light-color-variant);
-    background: none;
-}*/
-
 
 #profile-picture {
     width: 100px;
@@ -134,10 +114,48 @@ header {
     }
 }
 
-section {
-    position: relative;
+
+#tab-container {
     width: 100%;
-    height: calc(100vh - 250px);
+    height: 25px;
+
+    position: absolute;
+    top: 275px;
+
+    background: #fff;    
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: stretch;
+
+}
+
+.tab-button {
+    width: 100%;
+    height: 100%;
+
+    text-align: center;
+    text-decoration: none;
+    border: none;
+
+    font-family: Courier, monospace;
+    font-size: 1rem;
+    text-align: center;
+
+    color: var(--main-light-color);
+    background: var(--main-dark-color);
+
+    transition: all ease-in-out 250ms;
+}
+
+.tab-button:hover {
+    background: var(--main-accent-color);
+    cursor: pointer;
+}
+
+.tab-button.active {
+    background: var(--main-accent-color);
 }
 
 /*
@@ -146,11 +164,15 @@ section {
 
 */
 
+section {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 250px);
+}
+
 .collection-container {
     position: relative;
     padding: 60px;
-
-    /*display: inline-block;*/
 
     display: flex;
     flex-direction: row;
