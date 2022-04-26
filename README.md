@@ -4,5 +4,5 @@ This is a simple tool to view your vinyl collection and wishlist on [Discogs](ht
 
 ## How does it work?
 
-Simply enter your username and your [API-token](https://www.discogs.com/de/settings/developers) (don't worry, your information is stored locally, on your computer only).
+Simply enter your username and your [API-token](https://www.discogs.com/de/settings/developers) (your information is stored locally).
 The website will then get your collection-information and display all your covers.
