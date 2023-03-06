@@ -30,11 +30,15 @@ async function init() {
     })
 
     login_button.addEventListener("click", function() {
-        let username = login_username.value;
-        let password = login_token.value;
+        let username = cleanString(login_username.value);
+        let password = cleanString(login_token.value);
         loginManager.addEventListener("onLoginFailed", loginFailCss)
         loginManager.login(username, password);
     });
+}
+
+function cleanString(string) {
+    return encodeURIComponent(string.trim());
 }
 
 
