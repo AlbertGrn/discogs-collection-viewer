@@ -28,16 +28,16 @@
 
     <div id="tab-container">
 
-        <button class="tab-button" id="defaultOpen" onclick="switchTab(event, 'collection-container')">Collection</button>
+        <button class="tab-button" id="defaultOpen">Collection</button>
         
-        <button class="tab-button" onclick="switchTab(event, 'wishlist-container')">Wishlist</button>
+        <button class="tab-button">Wishlist</button>
 
     </div>
 
 </header>
 <section class="main-section">
 
-    <button onclick="topFunction()" id="myBtn" title="Scroll back to top">Back to top</button>
+    <button id="myBtn" title="Scroll back to top">Back to top</button>
 
 
     <div class="collection-container tabcontent" id="collection-container">
@@ -49,6 +49,6 @@
     </div>
 
 </section>
-    <script src="js/collection.js" charset="utf-8"></script>
+    <script type="module" src="js/collection/collection.js" charset="utf-8"></script>
 </body>
 </html>
