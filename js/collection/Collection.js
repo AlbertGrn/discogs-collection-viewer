@@ -1,3 +1,6 @@
+import ApiManager from "../api/ApiManager.js";
+import CoverManager from "./CoverManager.js";
+
 /*
     Elements for displaying covers
 */
@@ -15,10 +18,9 @@ const profile_picture = document.getElementById("profile-picture")
 const header_name = document.getElementById("main-header-name");
 const header_description = document.getElementById("main-header-description");
 
-const artistRegex =  /\(\d+\)/g;
-
 var profile_url = localStorage.getItem("profile_url");
 var collection_url = localStorage.getItem("collection_url");
+var wishlist_url = localStorage.getItem("wishlist_url");
 
 var onCollectionTab = true;
 
@@ -44,197 +46,56 @@ values_list[0].addEventListener("mouseout", function() {
     }
 })
 
-
 /*
 
-## SET MIN VALUE ##
+## LOADING OF ALL ELEMENTS
 
 */
 
-async function getMinValues(data, index) {
+function initCollection() {
+    ApiManager.getData(collection_url).then(collectionData => {
+        let collectionManager = new CoverManager(collectionData);
+        collectionManager.loadCollection();
 
-    //Wenn keine sales_history besteht, wird 0 zurückgegeben
-    if(data.releases[index].basic_information.sales_history == null) {
-        return 0;
-    }
-
-    return data.releases[index].basic_information.sales_history.min.value;
+        setValues(collectionManager);
+    });
+    ApiManager.getData(profile_url).then(profileData => {
+        setHeaderInfo(profileData);
+    })
 }
 
-async function getMinSum(data) {    
-    var minSum = 0;
-
-    for (let index = 0; index < await data.releases.length; index++) {
-        minSum += await getMinValues(data, index);
-    }
-    minSum = Math.round(minSum);
-    return minSum;
+function initWishlist() {
+    ApiManager.getData(wishlist_url).then(wishlistData => {
+        let wishlistManager = new CoverManager(wishlistData);
+        wishlistManager.loadWishlist();
+    });
 }
 
-async function setMinSum(data) {
-    var minSum = await getMinSum(data);
-    min_element.innerText = "min: " + minSum + "€";
+function setValues(manager) {
+    let headerValues = manager.getHeaderValues();
+
+    min_element.innerText = "min: " + headerValues[0] + "€";
+    median_element.innerText = "median: " + headerValues[1] + "€";
+    max_element.innerText = "max: " + headerValues[2] + "€";
 }
 
-/*
+function setHeaderInfo(profileData) {
+    header_name.innerText = profileData.username;
 
-## SET MEDIAN VALUE ##
-
-*/
-
-async function getMedianValues(data, index) {
-
-    //Wenn keine sales_history besteht, wird 0 zurückgegeben
-    if(data.releases[index].basic_information.sales_history == null) {
-        return 0;
-    }
-
-    return data.releases[index].basic_information.sales_history.median.value;
-}
-
-async function getMedianSum(data) {    
-    var medianSum = 0;
-
-    for (let index = 0; index < await data.releases.length; index++) {
-        medianSum += await getMedianValues(data, index);
-    }
-    medianSum = Math.round(medianSum);
-    return medianSum;
-}
-
-async function setMedianSum(data) {
-    var medianSum = await getMedianSum(data);
-    median_element.innerText = "median: " + medianSum + "€";
-}
-
-/*
-
-## SET MAX VALUE ##
-
-*/
-
-async function getMaxValues(data, index) {
-
-    //Wenn keine sales_history besteht, wird 0 zurückgegeben
-    if(data.releases[index].basic_information.sales_history == null) {
-        return 0;
-    }
-
-    return data.releases[index].basic_information.sales_history.max.value;
-}
-
-async function getMaxSum(data) {    
-    var maxSum = 0;
-
-    for (let index = 0; index < await data.releases.length; index++) {
-        maxSum += await getMaxValues(data, index);
-    }
-    maxSum = Math.round(maxSum);
-    return maxSum;
-}
-
-async function setMaxSum(data) {
-    var maxSum = await getMaxSum(data);
-    max_element.innerText = "max: " + maxSum + "€";
-}
-
-
-
-
-async function setValues(data) {
-    setMinSum(data);
-    setMedianSum(data);
-    setMaxSum(data);
-}
-
-
-async function getCoverUrl(data, index) {
-    return data.releases[index].basic_information.huge_thumb;
-}
-
-function setCover(element, url, title, artist) {
-    element.style.background = "url("+ url +")";
-    element.style.backgroundSize = "contain";
-    element.style.backgroundRepeat = "no-repeat";
-
-    let coverText = getNewCoverText();
-    element.appendChild(coverText);
-
-    artist = artist.replace(artistRegex, '');
-    coverText.innerText = title + "\n-\n" + artist;
-}
-
-function getNewCoverElement(index) {
-    var div = document.createElement('div');
-    
-    div.className = 'collection-cover';
-    div.id = 'cover-' + (index+1);
-    
-    collection_container.appendChild(div);
-    
-    return div;
-}
-
-async function setAllCovers(data) {
-    for (let index = 0; index < data.releases.length; index++) {
-        let coverText = await getCoverTextFromJson(data, index);
-        setCover(getNewCoverElement(index), await getCoverUrl(data, index), coverText[0], coverText[1]);
-    }
-}
-
-function getNewCoverText() {
-    var p = document.createElement('p');
-    p.className = 'collection-cover-text';
-
-    return p;
-}
-
-async function getCoverTextFromJson(data, index) {
-    let coverTitle = data.releases[index].basic_information.title;
-    let coverArtist = data.releases[index].basic_information.artists[0].name;
-    
-    return [coverTitle, coverArtist];
-}
-
-fetch(collection_url)
-    .then((response) => response.json())
-    .then((data) => {
-        setAllCovers(data);
-        setValues(data);
-    }).catch(function () {
-        console.log("Collection Promise Rejected");
-    }
-);
-
-
-
-async function setHeaderName(data) {
-    header_name.innerText = data.username;
-}
-
-async function setProfilePicture(data) {
-    profile_picture.style.background = 'url(' + data.avatar_url +')';
+    profile_picture.style.background = 'url(' + profileData.avatar_url +')';
     profile_picture.style.backgroundSize = "contain";
+
+    profile_link.setAttribute('href', profileData.uri);
 }
 
-async function setProfileLink(data) {
-    profile_link.setAttribute('href', data.uri);
-}
+/*
 
-fetch(profile_url)
-    .then((response) => response.json())
-    .then((data) => {
-        setHeaderName(data);
-        setProfilePicture(data);
-        setProfileLink(data);
-    }).catch(function() {
-        console.log("Profile Promise Rejected");
-    }
-);
+## SCROLL TO TOP BUTTON ##
 
+*/
 
 //Get the button:
-mybutton = document.getElementById("myBtn");
+let mybutton = document.getElementById("myBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
@@ -248,80 +109,13 @@ function scrollFunction() {
 }
 
 // When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", topFunction);
+
 function topFunction() {
   document.body.scrollTop = 0; // For Safari
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
-/*
-
-## WISHLIST ##
-
-*/
-
-
-
-
-async function getWantUrl(data, index) {
-    return data.wants[index].basic_information.cover_image;
-}
-
-function setWant(element, url, title, artist) {
-    element.style.background = "url("+ url +")";
-    element.style.backgroundSize = "contain";
-    element.style.backgroundRepeat = "no-repeat";
-
-    let wantText = getNewWantText();
-    element.appendChild(wantText);
-
-    artist = artist.replace(artistRegex, '');
-    wantText.innerText = title + "\n-\n" + artist;
-}
-
-function getNewWantElement(index) {
-    var div = document.createElement('div');
-    
-    div.className = 'collection-cover';
-    div.id = 'cover-' + (index+1);
-    
-    wishlist_container.appendChild(div);
-    
-    return div;
-}
-
-async function setAllWants(data) {
-    for (let index = 0; index < data.wants.length; index++) {
-        let wantText = await getWantTextFromJson(data, index);
-        setWant(getNewWantElement(index), await getWantUrl(data, index), wantText[0], wantText[1]);
-    }
-}
-
-function getNewWantText() {
-    var p = document.createElement('p');
-    p.className = 'collection-cover-text';
-
-    return p;
-}
-
-async function getWantTextFromJson(data, index) {
-    let wantTitle = data.wants[index].basic_information.title;
-    let wantArtist = data.wants[index].basic_information.artists[0].name;
-    
-    return [wantTitle, wantArtist];
-}
-
-
-
-var wishlist_url = localStorage.getItem("wishlist_url");
-
-fetch(wishlist_url)
-    .then((response) => response.json())
-    .then((data) => {
-        setAllWants(data);
-    }).catch(function () {
-        console.log("Collection Promise Rejected");
-    }
-);
 
 /*
 
@@ -329,7 +123,12 @@ fetch(wishlist_url)
 
 */
 
-function switchTab (event, tab_name) {
+const tab_buttons = document.getElementsByClassName("tab-button");
+for (let i = 0; i < tab_buttons.length; i++) {
+    tab_buttons[i].addEventListener("click", event => switchTab(event, tab_buttons[i].textContent))
+}
+
+function switchTab (event, tab_text) {
     var i, tabcontent, tab_button;
 
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -342,7 +141,9 @@ function switchTab (event, tab_name) {
       tab_button[i].className = tab_button[i].className.replace(" active", "");
     }
 
-    if(tab_name == "wishlist-container") {
+    if(tab_text == "Wishlist") {
+        document.getElementById("wishlist-container").style.display = "flex";
+
         min_element.style.color = "transparent";
         median_element.style.color = "transparent";
         max_element.style.color = "transparent";
@@ -351,6 +152,8 @@ function switchTab (event, tab_name) {
 
         header_description.innerText = "Vinyl Wishlist";
     } else {
+        document.getElementById("collection-container").style.display = "flex";
+
         min_element.style.color = "var(--main-light-color)";
         median_element.style.color = "var(--main-light-color)";
         max_element.style.color = "var(--main-light-color)";
@@ -360,8 +163,18 @@ function switchTab (event, tab_name) {
         header_description.innerText = "Vinyl Collection";
     }
 
-    document.getElementById(tab_name).style.display = "flex";
     event.currentTarget.className += " active";
 }
+
+/*
+
+## CALLING OF INIT FUNCTIONS ##
+
+*/
+
+initCollection();
+initWishlist();
+
+// Initial opening of the collection tab
 
 document.getElementById("defaultOpen").click();
