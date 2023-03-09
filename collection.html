@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Vinyl Collection</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="icon" href="/img/icon.svg" type="image/svq+xml">
 </head>
+
 <body>
 
-<header>
+    <header>
 
-    <ul class="values-list">
-        <li>
-            <p class="value" id="min">min: 0€</p>
-        </li>
-        <li>
-            <p class="value" id="median">median: 0€</p>
-        </li>
-        <li>
-            <p class="value" id="max">max: 0€</p>
-        </li>
-    </ul>
+        <ul class="values-list">
+            <li>
+                <p class="value" id="min">min: 0€</p>
+            </li>
+            <li>
+                <p class="value" id="median">median: 0€</p>
+            </li>
+            <li>
+                <p class="value" id="max">max: 0€</p>
+            </li>
+        </ul>
 
-    <h1 class="main-header"><span id="main-header-name">[Name]</span>'s<br/><span id="main-header-description">Vinyl Collection</span></h1>
+        <h1 class="main-header"><span id="main-header-name">[Name]</span>'s<br /><span
+                id="main-header-description">Vinyl Collection</span></h1>
 
-    <a id="profile-link" href="" target="_blank"><div id="profile-picture"></div></a>
+        <a id="profile-link" href="" target="_blank">
+            <div id="profile-picture"></div>
+        </a>
 
-    <div id="tab-container">
+        <div id="tab-container">
 
-        <button class="tab-button" id="defaultOpen">Collection</button>
-        
-        <button class="tab-button">Wishlist</button>
+            <button class="tab-button" id="defaultOpen">Collection</button>
 
-    </div>
+            <button class="tab-button">Wishlist</button>
 
-</header>
-<section class="main-section">
+        </div>
 
-    <button id="myBtn" title="Scroll back to top">Back to top</button>
+    </header>
+    <section class="main-section">
+
+        <button id="myBtn" title="Scroll back to top">Back to top</button>
+
+        <button id="random-button" title="Pick a random record"><img src="./img/rnd_icon.svg" alt="rnd"></button>
 
 
-    <div class="collection-container tabcontent" id="collection-container">
+        <div class="collection-container tabcontent" id="collection-container">
 
-    </div>
+        </div>
 
-    <div class="collection-container tabcontent" id="wishlist-container">
+        <div class="collection-container tabcontent" id="wishlist-container">
 
-    </div>
+        </div>
 
-</section>
+    </section>
     <script type="module" src="js/collection/collection.js" charset="utf-8"></script>
 </body>
+
 </html>

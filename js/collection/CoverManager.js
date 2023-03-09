@@ -1,13 +1,14 @@
-import Cover from "../ui/Cover.js";
+import Cover from '../ui/Cover.js';
 
-const collection_container = document.getElementById("collection-container");
-const wishlist_container = document.getElementById("wishlist-container");
+const collection_container = document.getElementById('collection-container');
+const wishlist_container = document.getElementById('wishlist-container');
 
 
 class CoverManager {
 
     constructor(data) {
         this.data = data;
+        this.coverArray = [];
     }
 
     getHeaderValues() {
@@ -15,7 +16,7 @@ class CoverManager {
     }
 
     loadCollection() {
-        setCollectionCovers(this.data);
+        this.coverArray = setCollectionCovers(this.data, this.coverArray);
     }
 
     loadWishlist() {
@@ -25,14 +26,17 @@ class CoverManager {
 }
 
 
-function setCollectionCovers(data) {
+function setCollectionCovers(data, coverArray) {
     for (let index = 0; index < data.releases.length; index++) {
 
         let coverData = [data.releases[index].basic_information.huge_thumb, data.releases[index].basic_information.title, data.releases[index].basic_information.artists[0].name]
 
-        let cover = new Cover(coverData)
-        collection_container.appendChild(cover.getCoverElement(index));
+        let cover = new Cover(coverData);
+        let coverEl = cover.getCoverElement(index)
+        collection_container.appendChild(coverEl);
+        coverArray.push(coverEl);
     }
+    return coverArray;
 }
 
 function setWishlistCovers(data) {

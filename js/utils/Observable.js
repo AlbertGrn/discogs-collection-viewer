@@ -29,6 +29,9 @@ class Observable {
 
 }
 
-export { Event, Observable };
+export {
+    Event,
+    Observable
+};
 
 export default Observable;
