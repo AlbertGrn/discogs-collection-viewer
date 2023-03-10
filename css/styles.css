@@ -355,14 +355,14 @@ section {
     text-align: center;
     margin-top: 2em;
 
-    transform: translateY(125%);
+    /* transform: translateY(125%); */
 
-    animation-name: centerToTop;
+    /* animation-name: centerToTop;
     animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-    animation-delay: 2s;
+    animation-delay: 2s; */
 }
 
 
@@ -387,14 +387,14 @@ section {
     transition: all 100ms ease-in-out;
 
 
-    color: var(--main-light-color);
+    /* color: var(--main-light-color);*/
 
-    animation-name: whiteToBlue;
+    /* animation-name: whiteToBlue;
     animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-    animation-delay: 2s;
+    animation-delay: 2s; */
 
 }
 
@@ -418,20 +418,20 @@ section {
     color: var(--main-dark-color);
     width: 30em;
     height: 17em;
-    margin: 8em auto 0;
+    margin: 4em auto 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     border-radius: 50px;
 
-    opacity: 0%;
+    /* opacity: 0%; */
 
-    animation-name: hideToShow;
+    /* animation-name: hideToShow;
     animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-    animation-delay: 2.5s;
+    animation-delay: 2.5s; */
 }
 
 @keyframes hideToShow {
@@ -447,6 +447,12 @@ section {
 #login-box-header {
     text-align: center;
     font-size: 2rem;
+}
+
+#login-box form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .login-box-input {
@@ -523,14 +529,16 @@ section {
     text-decoration-color: transparent;
     transition: all 100ms ease-in-out;
 
-    opacity: 0%;
+    /* opacity: 0%; */
 
-    animation-name: hideToShow;
+    opacity: 50%;
+
+    /* animation-name: hideToShow;
     animation-duration: 1.5s;
     animation-timing-function: ease-in-out;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-    animation-delay: 5s;
+    animation-delay: 5s; */
 }
 
 @keyframes hideToShow {
