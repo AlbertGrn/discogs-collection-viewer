@@ -12,7 +12,7 @@ class CoverManager {
     }
 
     getHeaderValues() {
-        return [getMinSum(this.data), getMedianSum(this.data), getMaxSum(this.data)];
+        return [getMinSum(this.data), getMedianSum(this.data), getMaxSum(this.data), getRecordCount(this.data)];
     }
 
     loadCollection() {
@@ -107,6 +107,10 @@ function getMaxSum(data) {
     }
     maxSum = Math.round(maxSum);
     return maxSum;
+}
+
+function getRecordCount(data) {
+    return data.pagination.items;
 }
 
 

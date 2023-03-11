@@ -8,6 +8,7 @@ const values_list = document.getElementsByClassName('values-list');
 const min_element = document.getElementById('min');
 const median_element = document.getElementById('median');
 const max_element = document.getElementById('max');
+const amount_element = document.getElementById('record-count');
 const collection_container = document.getElementById('collection-container');
 const wishlist_container = document.getElementById('wishlist-container');
 /*
@@ -37,6 +38,7 @@ values_list[0].addEventListener('mouseover', function () {
         min_element.style.color = 'var(--main-accent-color-variant-3)';
         median_element.style.color = 'var(--main-accent-color-variant-2)';
         max_element.style.color = 'var(--main-accent-color-variant-1)';
+        amount_element.style.color = 'var(--main-accent-color-variant-4)';
     }
 })
 
@@ -45,6 +47,7 @@ values_list[0].addEventListener('mouseout', function () {
         min_element.style.color = 'var(--main-light-color)';
         median_element.style.color = 'var(--main-light-color)';
         max_element.style.color = 'var(--main-light-color)';
+        amount_element.style.color = 'var(--main-light-color)';
     }
 })
 
@@ -102,9 +105,10 @@ function initWishlist() {
 function setValues(manager) {
     let headerValues = manager.getHeaderValues();
 
-    min_element.innerText = 'min: ' + headerValues[0] + '€';
-    median_element.innerText = 'median: ' + headerValues[1] + '€';
-    max_element.innerText = 'max: ' + headerValues[2] + '€';
+    min_element.innerText = `min: ${headerValues[0]}€`;
+    median_element.innerText = `median: ${headerValues[1]}€`;
+    max_element.innerText = `max: ${headerValues[2]}€`;
+    amount_element.innerText = `${headerValues[3]} records`
 }
 
 function setHeaderInfo(profileData) {
