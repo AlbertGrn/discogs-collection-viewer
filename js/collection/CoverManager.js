@@ -33,9 +33,11 @@ function setCollectionCovers(data, coverArray) {
 
         let cover = new Cover(coverData);
         let coverEl = cover.getCoverElement(index)
-        collection_container.appendChild(coverEl);
         coverArray.push(coverEl);
     }
+    coverArray.forEach(element => {
+        collection_container.appendChild(element);
+    });
     return coverArray;
 }
 

@@ -2,6 +2,15 @@ import ApiManager from '../api/ApiManager.js';
 import CoverManager from './CoverManager.js';
 
 /*
+    Elements for color toggle
+*/
+
+const color_toggle_button = document.getElementById('mode-toggle');
+const color_toggle_span = document.getElementById('mode-icon');
+const color_toggle_icon = document.querySelector('#mode-icon img');
+const random_button_icon = document.querySelector('#random-button img');
+
+/*
     Elements for displaying covers
 */
 const values_list = document.getElementsByClassName('values-list');
@@ -26,6 +35,37 @@ var collection_url = localStorage.getItem('collection_url');
 var wishlist_url = localStorage.getItem('wishlist_url');
 
 var onCollectionTab = true;
+
+/*
+
+## COLOR MODE TOGGLE ##
+
+*/
+
+color_toggle_button.addEventListener('click', function () {
+    // class contains current mode
+    if (color_toggle_span.classList.contains('light')) {
+        // switch to dark mode
+        collection_container.style.background = 'var(--main-bg-color)';
+        color_toggle_icon.src = './img/light-icon.svg';
+        random_button_icon.src = './img/rnd_icon_dark.svg';
+        random_button.style.background = 'var(--main-bg-color)';
+        random_button.style.borderColor = 'var(--main-light-color)';
+        
+        color_toggle_span.classList.remove('light');
+        color_toggle_span.classList.add('dark');
+    } else {
+        // switch to light mode
+        collection_container.style.background = 'var(--main-light-color)';
+        color_toggle_icon.src = './img/dark-icon.svg';
+        random_button_icon.src = './img/rnd_icon.svg';
+        random_button.style.background = 'var(--main-light-color)';
+        random_button.style.borderColor = 'var(--main-dark-color)';
+        
+        color_toggle_span.classList.remove('dark');
+        color_toggle_span.classList.add('light');
+    }
+})
 
 /*
 
@@ -156,10 +196,20 @@ function topFunction() {
 
 */
 
-function pickRandomCover() {
+random_button.addEventListener('mouseover', function() {
+    random_button.style.borderColor = 'var(--main-accent-color)';
+    random_button_icon.src = './img/rnd_icon_accent.svg';
+})
 
-}
-
+random_button.addEventListener('mouseout', function() {
+    if (color_toggle_span.classList.contains('light')) {
+        random_button.style.borderColor = 'var(--main-dark-color)';
+        random_button_icon.src = './img/rnd_icon.svg';
+    } else {
+        random_button.style.borderColor = 'var(--main-light-color)';
+        random_button_icon.src = './img/rnd_icon_dark.svg';
+    }
+})
 
 /*
 
