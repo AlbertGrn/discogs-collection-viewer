@@ -47,6 +47,7 @@ color_toggle_button.addEventListener('click', function () {
     if (color_toggle_span.classList.contains('light')) {
         // switch to dark mode
         collection_container.style.background = 'var(--main-bg-color)';
+        wishlist_container.style.background = 'var(--main-bg-color)';
         color_toggle_icon.src = './img/light-icon.svg';
         random_button_icon.src = './img/rnd_icon_dark.svg';
         random_button.style.background = 'var(--main-bg-color)';
@@ -57,6 +58,7 @@ color_toggle_button.addEventListener('click', function () {
     } else {
         // switch to light mode
         collection_container.style.background = 'var(--main-light-color)';
+        wishlist_container.style.background = 'var(--main-light-color)';
         color_toggle_icon.src = './img/dark-icon.svg';
         random_button_icon.src = './img/rnd_icon.svg';
         random_button.style.background = 'var(--main-light-color)';
@@ -242,6 +244,7 @@ function switchTab(event, tab_text) {
         min_element.style.color = 'transparent';
         median_element.style.color = 'transparent';
         max_element.style.color = 'transparent';
+        amount_element.style.color = 'transparent';
 
         onCollectionTab = false;
 
@@ -253,6 +256,7 @@ function switchTab(event, tab_text) {
         min_element.style.color = 'var(--main-light-color)';
         median_element.style.color = 'var(--main-light-color)';
         max_element.style.color = 'var(--main-light-color)';
+        amount_element.style.color = 'var(--main-light-color)';
 
         onCollectionTab = true;
 
